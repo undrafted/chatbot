@@ -4,13 +4,15 @@ const Mongo = require('mongodb').MongoClient;
 
 module.exports = function(ctx, cb){
   let mailId = ctx.data.replyData;
+  let isWon = ctx.data.won? true : false;
   if(mailId){
     Mongo.connect(uri, function(error, db){
       db.collection('customers')
         .update({
           email: mailId
         }, {
-          email: mailId
+          email: mailId,
+          contestWon: isWon
         }, {
           upsert: true
         }, (error, result) => {
