@@ -3,6 +3,11 @@
 const patterns = require('../patterns');
 const xRegExp = require('xregexp');
 
+// getting named capture group as entity
+let createEntities = (str, pattern) => {
+  return xRegExp.exec(str, xRegExp(pattern, 'i'));
+}
+
 /*
   > Matches the pattern of the user input 'str'
     against the pattern dictionary
@@ -13,14 +18,15 @@ const xRegExp = require('xregexp');
 */
 let matchPattern = (str, cb) => {
   let getResult = patterns.find(item => {
-    if(xRegExp.test(str, xRegExp(item.pattern, "i"))){
+    if(xRegExp.test(str, xRegExp(item.pattern, 'i'))){
       return true;
     }
   });
 
   if(getResult) {
     return cb({
-      intent: getResult.intent
+      intent: getResult.intent,
+      entities: createEntities(str, getResult.pattern)
     });
   } else {
     return cb({});

@@ -1,7 +1,7 @@
 'use strict';
 
 const patternDictionary = [{
-  pattern: '\\b(Hi|Hello|Hey)\\b',
+  pattern: '\\b(?<greeting>Hi|Hello|Hey)\\b',
   intent: 'Hello'
 }, {
   pattern: '\\b(bye|exit)\\b',
