@@ -1,3 +1,5 @@
+'use strict';
+
 const patternDictionary = [{
   patten: '\\b(Hi|Hello|Hey|)\\b',
   intent: 'Hello'
